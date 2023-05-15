@@ -20,7 +20,7 @@ jab tak num1 + num2 <= 10 aur num1 == 1 :
 '''
 
 functionString = '''
-Kaam jama karo ( ye a, ye b ) :
+Kaam jamaKaro ( ye a, ye b ) :
 \tye c;
 \tc = a + b
 \tbhejo c
