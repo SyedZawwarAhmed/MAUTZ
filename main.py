@@ -1,4 +1,4 @@
-from modules.tokenize import tokenize
+from modules.getTokens import tokenize
 
 variableString = 'ye car123,apple11,house101;'
 ifString = '''
