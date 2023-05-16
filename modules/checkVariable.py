@@ -69,7 +69,7 @@ print(check_variable_declaration(tokenize('ye a, ;')))
 print(check_variable_declaration(tokenize('ye 123a,b;')))
 print(check_variable_declaration(tokenize('ye yeh;')))
 print(check_variable_declaration(tokenize('ye a = 1;')))
-print(check_variable_declaration(tokenize('ye c = a + 2 / 5;')))
+print(check_variable_declaration(tokenize('ye c = a + b / 5;')))
 print(var_decleared)
 print(assigned_var)
  
