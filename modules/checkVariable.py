@@ -1,11 +1,23 @@
 import re
 from getTokens import tokenize
 
+var_decleared = []
+assigned_var = []
+
 def check_variable_declaration(tokens):
-    return dec(tokens)
+    valid = dec(tokens)
+    if valid:
+        for i in range(1, len(tokens)):
+            if i%2 != 0: 
+                var_decleared.append(tokens[i])
+    return valid
 
 def dec(tokens):
-    # if len(tokens) >= 3:
+    if len(tokens) >= 5 and tokens[2] == "=":
+        valid = initializer(tokens[0]) and id(tokens[1]) and expression(tokens[3:-1]) and semicolon(tokens[-1])
+        if valid:
+            assigned_var.append(tokens[1])
+        return valid
 
     return initializer(tokens[0]) and id(tokens[1]) and new(tokens[2:-1]) and semicolon(tokens[-1])
 
@@ -15,6 +27,25 @@ def initializer(token):
 def id(token):
     pattern = r'^[a-zA-Z][a-zA-Z0-9]{0,18}$'
     return bool(re.match(pattern, token))
+
+def expression(tokens):
+    operators = ['+', '-', '*', '/', '%', '^']
+    valid = True
+    # for item in tokens:
+    #     if item
+    for i in range(len(tokens)):
+        if i%2 == 0:
+            if tokens[i] not in assigned_var and not tokens[i].isnumeric():
+                valid = False
+                print(tokens[i], valid)
+                # break
+        else:
+            if tokens[i] not in operators:
+                valid = False
+                print(tokens[i], valid)
+                # break
+        
+    return valid
 
 def new(tokens):
     if len(tokens) == 0:
@@ -31,10 +62,14 @@ def comma(token):
 def semicolon(token):
     return token == ';'
 
-# print(check_variable(['ye', 'car123', ',', 'apple11', ',', 'house1', ';']))
-# print(check_variable(['ye', 'car123', ';']))
-# print(check_variable(tokenize('ye 1a, , _b;')))
-# print(check_variable(tokenize('ye a, ;')))
-# print(check_variable(tokenize('ye 123a,b;')))
-# print(check_variable(tokenize('ye yeh;')))
-# print(check_variable(tokenize('ye ;')))
+print(check_variable_declaration(['ye', 'car123', ',', 'apple11', ',', 'house1', ';']))
+print(check_variable_declaration(['ye', 'car123', ';']))
+print(check_variable_declaration(tokenize('ye 1a, , _b;')))
+print(check_variable_declaration(tokenize('ye a, ;')))
+print(check_variable_declaration(tokenize('ye 123a,b;')))
+print(check_variable_declaration(tokenize('ye yeh;')))
+print(check_variable_declaration(tokenize('ye a = 1;')))
+print(check_variable_declaration(tokenize('ye c = a + 2 / 5;')))
+print(var_decleared)
+print(assigned_var)
+ 
