@@ -73,3 +73,11 @@ print(check_variable_declaration(tokenize('ye c = a + 2 / 5;')))
 print(var_decleared)
 print(assigned_var)
  
+
+# print(check_variable(['ye', 'car123', ',', 'apple11', ',', 'house1', ';']))
+# print(check_variable(['ye', 'car123', ';']))
+# print(check_variable(tokenize('ye 1a, , _b;')))
+# print(check_variable(tokenize('ye a, ;')))
+# print(check_variable(tokenize('ye 123a,b;')))
+# print(check_variable(tokenize('ye yeh;')))
+# print(check_variable(tokenize('ye ;')))
