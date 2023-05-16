@@ -1,11 +1,12 @@
 import re
 from getTokens import tokenize
 
-def check_variable_declaration(tokens):
+def check_variable(tokens):
     return dec(tokens)
 
 def dec(tokens):
-    # if len(tokens) >= 3:
+    if len(tokens) >= 5 and tokens[2] == "=":
+        return initializer(tokens[0]) and id(tokens[1]) and expression(tokens[3:-1]) and semicolon(tokens[-1])
 
     return initializer(tokens[0]) and id(tokens[1]) and new(tokens[2:-1]) and semicolon(tokens[-1])
 
@@ -15,6 +16,12 @@ def initializer(token):
 def id(token):
     pattern = r'^[a-zA-Z][a-zA-Z0-9]{0,18}$'
     return bool(re.match(pattern, token))
+
+def expression(tokens):
+    # valid = True
+    # for item in tokens:
+    #     if item
+    return len(tokens) == 1 
 
 def new(tokens):
     if len(tokens) == 0:
@@ -31,10 +38,12 @@ def comma(token):
 def semicolon(token):
     return token == ';'
 
-# print(check_variable(['ye', 'car123', ',', 'apple11', ',', 'house1', ';']))
-# print(check_variable(['ye', 'car123', ';']))
-# print(check_variable(tokenize('ye 1a, , _b;')))
-# print(check_variable(tokenize('ye a, ;')))
-# print(check_variable(tokenize('ye 123a,b;')))
-# print(check_variable(tokenize('ye yeh;')))
-# print(check_variable(tokenize('ye ;')))
+
+print(check_variable(['ye', 'car123', ',', 'apple11', ',', 'house1', ';']))
+print(check_variable(['ye', 'car123', ';']))
+print(check_variable(tokenize('ye 1a, , _b;')))
+print(check_variable(tokenize('ye a, ;')))
+print(check_variable(tokenize('ye 123a,b;')))
+print(check_variable(tokenize('ye yeh;')))
+print(check_variable(tokenize('ye ;')))
+print('\n',check_variable(tokenize('ye yeh = 3 ;')))
